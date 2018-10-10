@@ -1,0 +1,23 @@
+<div class="container col-12">
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+            <tr class=" m-auto  mb-2 border">
+                <th class="text-center ">Id</th>
+                <th class="text-center ">Form name</th>
+                <th class="text-center ">Form description</th>
+                <th class=" text-center ">Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let form of forms, let i=index">
+                <td *ngIf="i !==forms.length-1" class="text-center ">{{form['formIndex']}}</td>
+                <td *ngIf="i !==forms.length-1" class=" text-center ">{{form['formName']}}</td>
+                <td *ngIf="i !==forms.length-1" class=" text-center " style="word-wrap: break-word">{{form['formDescription']}}</td>
+                <td *ngIf="i !==forms.length-1" class=" text-center ">{{form['date'] | date:"medium"}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="btn btn-danger" (click)="goBack()" >Go back</button>
+    </div>
+</div>

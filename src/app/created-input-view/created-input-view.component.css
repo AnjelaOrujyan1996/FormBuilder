@@ -1,0 +1,8 @@
+input[type=text]{
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.changeInputStyle{
+    background-color: rebeccapurple !important;
+}

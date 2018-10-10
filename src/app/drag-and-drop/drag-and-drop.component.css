@@ -1,0 +1,90 @@
+/* You can add global styles to this file, and also import other style files */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  pointer-events: none;
+}
+
+/* high-performance display:none; helper */
+.gu-hide {
+  left: -9999px !important;
+}
+
+/* added to mirrorContainer (default = body) while dragging */
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* added to the source element while its mirror is dragged */
+.gu-transit {
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+
+.fixedElements {
+  background: rgb(160,84,242); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(160,84,242,1) 0%, rgba(107,22,226,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(160,84,242,1) 0%,rgba(107,22,226,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(160,84,242,1) 0%,rgba(107,22,226,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a054f2', endColorstr='#6b16e2',GradientType=0 ); /* IE6-9 */
+}
+
+.fixedElements div{
+  margin: 5px;
+  color: white;
+  font-size: 25px;
+}
+
+.createdForm {
+  background-color: white;
+  border-bottom: 5px solid rgba(160,84,242,1);
+  /*border-right: 5px solid rgba(160,84,242,1);*/
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6302ea', endColorstr='#a174e0',GradientType=0 ); /* IE6-9 */;
+  padding: 25px;
+
+}
+.createdForm:nth-child(1){
+  border:5px solid rgba(160,84,242,1);
+  border-left: none;
+  border-right: none;
+}
+.elemHover{
+  cursor: pointer;
+}
+
+.elemHover:hover{
+  background-color: rgba(107,22,226,.3);
+  transition: .7s;
+  padding-left: 15px;
+}
+
+.elementContent{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  box-sizing: border-box !important;
+}
+
+#right::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+#right::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+
+#right::-webkit-scrollbar-thumb {
+  background: rgb(160,84,242); /* Old browsers */
+  outline: 2px solid rgb(160,84,242);
+  border-radius: 10px;
+}
+

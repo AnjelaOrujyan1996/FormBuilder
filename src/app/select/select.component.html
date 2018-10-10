@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="modal-header col-12">
+            <h4 class="modal-title" id="modal-basic-title">Select option field</h4>
+            <button type="button" class="close" aria-label="Close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form (ngSubmit)="save()" #form="ngForm" class="col-12">
+            <div class="modal-body col-12 ">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <label class="col-12 mb-2 text-center" for="LabelName">Enter question!</label>
+                            <input class="col-12 mb-1 form-control" name="label" type="text" id="LabelName" [(ngModel)]="selectLabel"
+                                   (input)="updateAndSeeView($event.srcElement)" #label="ngModel" required/>
+                            <span class="col-12 mb-4 text-center hasErr" *ngIf="label.invalid && label.touched">Field can not be empty!</span>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-12 mb-2 text-center" for="optionCount">Choose options count</label>
+                            <input class="col-12 mb-4 form-control" type="number"
+                                   min="1" id="optionCount" name="optCount" [(ngModel)]="optionCount"
+                                   (input)="updateAndSeeView($event.srcElement)" required/>
+
+                        </div>
+
+                        <div class="row" *ngFor="let num of arrayOne(+(selectOptions['optionCount'])); let i=index">
+                            <label class="col-12 mb-2" for="{{i}}"> Write {{i+1}} option value! </label>
+                            <input class="col-12 mb-1 form-control" type="text" id="{{i}}" name="optValue"
+                                   value="{{selectOptions['optionValues'][i]}}"
+                                   (input)="updateAndSeeView($event.srcElement)"
+                                   [ngClass]="{'ng-invalid ng-touched': ind === i}"
+                                   required/>
+
+                        </div>
+
+                        <span class="col-12 mb-4 hasErr text-center" *ngIf="optError"> Field can not be empty!</span>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div>
+                            <h4> View </h4>
+                        </div>
+                        <div #view style="display: none" class="col-12">
+                            <app-created-select-view [selectOptions]="selectOptions"></app-created-select-view>
+                        </div>
+                    </div>
+
+                    <div class="col-12 modal-footer float-right">
+                        <button type="submit" class="btn editBtnStyle" [disabled]="form.invalid || optError">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

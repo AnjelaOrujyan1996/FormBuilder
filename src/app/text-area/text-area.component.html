@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="modal-header col-12">
+            <h4 class="modal-title" id="modal-basic-title">Text area field</h4>
+            <button type="button" class="close" aria-label="Close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form (ngSubmit)="save()" #form="ngForm" class="col-12 ">
+            <div class="modal-body col-12 ">
+                <div class="row">
+                    <div class="col-6 ">
+                        <div class="row">
+                            <label class="col-12 mb-2" for="LabelName">Enter question!</label>
+                            <input class="col-12 mb-4 form-control" type="text" id="LabelName" name="textareaLabel"
+                                   [(ngModel)]="textAreaLabel"
+                                   (input)="updateAndSeeView($event.srcElement)"
+                                   required/>
+                        </div>
+
+                        <div class="row" >
+                            <label class="col-12 mb-2" for="rowsCount">Choose rows count!</label>
+                            <input class="col-12 mb-4 form-control" type="number" min="1" id="rowsCount"
+                                   name="optCount" [(ngModel)]="rowsCount"
+                                   (input)="updateAndSeeView($event.srcElement)"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-12 mb-2" for="colsCount">Choose columns count!</label>
+                            <input class="col-12 mb-4 form-control" type="number" min="1" id="colsCount"
+                                   name="optCount" [(ngModel)]="colsCount"
+                                   (input)="updateAndSeeView($event.srcElement)"/>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div>
+                            <h4>View</h4>
+                        </div>
+                        <div #view style="display: none" class="col-12">
+                            <app-created-text-areaview [textAreaOptions]="textAreaOptions"></app-created-text-areaview>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer col-12 float-right">
+                        <button type="submit" class="btn editBtnStyle" [disabled]="form.invalid">Save</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+

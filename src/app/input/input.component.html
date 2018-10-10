@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="modal-header col-12">
+            <h4 class="modal-title" id="modal-basic-title">Input Field</h4>
+            <button type="button" class="close " aria-label="Close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form (ngSubmit)="save()" #form="ngForm" class="col-12">
+            <div class="modal-body" class="col-12">
+                <div class="row">
+                    <div class="col-6 p-0">
+                        <div class="col-12" >
+                            <label for="LabelName" class="col-12 text-center mb-2">Enter question! </label>
+                            <input class="col-12 mb-2 form-control" type="text" id="LabelName" name="label"
+                                    [(ngModel)]="inputLabel"
+                                   (input)="updateAndSeeView($event.srcElement)" #label="ngModel" required/>
+                            <span class="col-12 mb-4 text-center hasErr" *ngIf="label.invalid && label.touched">Field can not be empty!</span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="col-12 text-center mb-2" for="inputType">Select input type!</label>
+                            <select class="col-12 mb-4 form-control" name="types" id="inputType" [(ngModel)]="inputType"
+                                    (click)="updateAndSeeView($event.srcElement)">
+                                <option value="text" [selected]="editingOptions['inputType']==='text'">text</option>
+                                <option value="radio" [selected]="editingOptions['inputType']==='radio'">radio button
+                                </option>
+                                <option value="checkbox" [selected]="editingOptions['inputType']==='checkbox'">checkbox
+                                </option>
+                                <option value="date" [selected]="editingOptions['inputType']==='date'">date</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 text-center"
+                             *ngIf="editingOptions['inputType'] ==='radio'||editingOptions['inputType'] ==='checkbox'; else emptyDiv">
+                            <label class="col-12 mb-2" for="optionCount1">Choose options count!</label>
+                            <input class="col-12 form-control mb-4" type="number" min="1" id="optionCount1" name="optCount"
+                                   [(ngModel)]="optionCount"
+                                   (input)="updateAndSeeView($event.srcElement)"
+                                   required/>
+                        </div>
+
+                        <div class="col-12 mb-4" *ngIf="editingOptions['inputType'] ==='radio'|| editingOptions['inputType'] ==='checkbox'; else emptyDiv">
+                            <div class="col-12" *ngFor="let num of arrayOne(+(editingOptions['optionCount'])); let i=index">
+                                <div class="row">
+                                    <label for="{{i}}" class="col-6 mb-1">Write {{i+1}} option value</label>
+                                    <input type="text" class="col-6 mb-4 form-control" id="{{i}}"
+                                           name='optValue' value="{{editingOptions['optionValues'][i]}}"
+                                           (input)="updateAndSeeView($event.srcElement)"
+                                           [ngClass]="{'ng-invalid ng-touched': ind === i}" required/>
+                                </div>
+                            </div>
+                            <span class="col-12 text-center mb-4 hasErr"
+                                  *ngIf="optError"> Field can not be empty! </span>
+
+                        </div>
+
+                        <ng-template #emptyDiv>
+                            <input type="number" value="1" min="1" style="visibility: hidden" #optionCount>
+                        </ng-template>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="col-12 text-center mb-2">
+                            <h4> View </h4>
+                        </div>
+                        <div #view style="display: none" class="col-12">
+                            <app-created-input-view [inputOptions]="editingOptions"></app-created-input-view>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer col-12 float-right">
+                        <button type="submit" class="btn editBtnStyle" [disabled]="form.invalid || optError">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

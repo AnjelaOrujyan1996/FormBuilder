@@ -1,0 +1,99 @@
+<div class="container-fluid col-12">
+    <div class="row" id="mainContent" #mainContent>
+        <div class='col-md-3 col-lg-3 col-sm-12 col-xs-12 fixedElements' dragula="{{dragulaName}}" id="left"
+             [(dragulaModel)]="left">
+            <div *ngFor="let el of left; let i=index" id="type" class="elemHover"><span class="m-4"><i
+                    attr.class="{{el[1]}}"></i></span>{{el[0]}}
+            </div>
+        </div>
+        <div class='col-md-9 col-lg-9 col-sm-12 col-xs-12 p-0' style="background-color: rgba(230,216,250,1)">
+
+            <div class="col-12 p-0 elementContent" #el style="height: 90%; background-color: rgba(230,216,250,1); "
+                 dragula="{{dragulaName}}" id="right" #formContent
+                 [(dragulaModel)]="right">
+
+                <div class="createdForm col-12"
+                     *ngFor="let opt of CreatedFormElements[formInd]['options']; let i=index">
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn deleteBtnStyle float-right" (click)="delete(i)"><i
+                                    class="fa fa-minus-circle"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-12" [ngSwitch]="opt['type']">
+                            <app-created-input-view *ngSwitchCase="'Input'"
+                                                    [inputOptions]="opt"></app-created-input-view>
+                            <app-created-select-view *ngSwitchCase="'Select'"
+                                                     [selectOptions]="opt"></app-created-select-view>
+                            <app-created-text-areaview *ngSwitchCase="'TextArea'"
+                                                       [textAreaOptions]="opt"></app-created-text-areaview>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn editBtnStyle" (click)="edit(opt['type'], i)">EDIT</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 text-right pt-3">
+                <button class="btn editBtnStyle float-left" routerLink="/allForms" [disabled]="CreatedFormElements.length <=1">All forms</button>
+                <button class="btn editBtnStyle float-right" [disabled]="CreatedFormElements[formInd]['options'].length <= 0" (click)="openFormModal(content)">Save form</button>
+            </div>
+        </div>
+
+
+        <ng-template #content let-d="dismiss" let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="modal-body col-12">
+                        <label class="col-4"> Form name: </label>
+                        <input class="col-8" type="text" [(ngModel)]="formName" name="formName" required>
+                    </div>
+                    <div class="modal-body col-12">
+                        <label class="col-4"> Form description: </label>
+                        <input class="col-8" type="text" [(ngModel)]="formDescription" name="formDescription" required>
+                    </div>
+                    <div class="modal-footer col-12">
+                        <button type="button" class="btn editBtnStyle" (click)="saveForm(d)"> Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </ng-template>
+
+
+        <ng-template let-modal #Input>
+            <app-input (closeInputModal)="modal.dismiss('close')">
+            </app-input>
+        </ng-template>
+        <ng-template let-modal #SelectOption>
+            <app-select (closeSelectModal)="modal.dismiss('close')"></app-select>
+        </ng-template>
+        <ng-template let-modal #TextArea>
+            <app-text-area (closeTextAreaModal)="modal.dismiss('close')"></app-text-area>
+        </ng-template>
+
+
+    </div>
+</div>
+
+<!--<div class="container" style="position: sticky; bottom: 0">-->
+<!--<div class="row">-->
+<!--<div class="col-12 text-right">-->
+<!--<button  class="btn btn-success saveBtnStyle" type="submit"-->
+<!--(click)="save()">Save-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
