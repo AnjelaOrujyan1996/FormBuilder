@@ -15,7 +15,6 @@ export class AllFormsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.forms, "+++++++++++++++")
     }
 
     goBack() {
