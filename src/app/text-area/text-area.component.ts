@@ -25,9 +25,12 @@ export class TextAreaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.textAreaLabel = this.textAreaOptions['textArealabel'];
+
+        this.textAreaLabel = this.textAreaOptions['textAreaLabel'];
         this.rowsCount = this.textAreaOptions['rowsCount'];
-        this.colsCount = this.textAreaOptions['colsCount']
+        this.colsCount = this.textAreaOptions['colsCount'];
+
+        this.view.nativeElement.style.display = "block";
     }
 
     updateAndSeeView(e) {
@@ -38,7 +41,6 @@ export class TextAreaComponent implements OnInit {
             rowsCount: this.rowsCount,
             colsCount: this.colsCount,
         }
-        this.view.nativeElement.style.display = "block";
     }
 
     save() {
@@ -65,10 +67,6 @@ export class TextAreaComponent implements OnInit {
 
         this.close();
 
-    }
-
-    arrayOne(n:Number): any[] {
-        return Array(n);
     }
 
     close() {

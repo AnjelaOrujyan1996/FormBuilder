@@ -2,6 +2,7 @@ input:focus{
     box-shadow: none !important;
     outline: none !important;
     border: 2px solid rgba(107,22,226,1) !important;
+    color:  rgba(107,22,226,1) !important;
 }
 
 select:focus{
@@ -46,6 +47,7 @@ select:focus{
 
 .editBtnStyle:focus{
     box-shadow: none !important;
+    color: rgba(107,22,226,1)!important;
 }
 
 

@@ -188,7 +188,7 @@ export class DragAndDropComponent implements OnInit, AfterViewChecked {
         if (x) {
             this.CreatedFormElements[this.formInd]['options'].splice(0)
             this.router.navigate(["/allForms"]);
-        }
+
             CreatedFormElements[this.formInd]['formIndex'] = this.formInd;
             CreatedFormElements[this.formInd]['formName'] = this.formName;
             CreatedFormElements[this.formInd]['formDescription'] = this.formDescription;
@@ -202,8 +202,12 @@ export class DragAndDropComponent implements OnInit, AfterViewChecked {
                 date: Date,
                 options: []
             })
-            console.dir(CreatedFormElements)
+        } else {
+            this.formName = "";
+            this.formDescription = "";
+        }
 
+        console.dir(CreatedFormElements)
         d();
     }
 

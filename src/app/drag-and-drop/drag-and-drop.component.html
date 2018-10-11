@@ -39,35 +39,50 @@
 
             </div>
             <div class="col-12 text-right pt-3">
-                <button class="btn editBtnStyle float-left" routerLink="/allForms" [disabled]="CreatedFormElements.length <=1">All forms</button>
-                <button class="btn editBtnStyle float-right" [disabled]="CreatedFormElements[formInd]['options'].length <= 0" (click)="openFormModal(content)">Save form</button>
+                <button class="btn editBtnStyle float-left" routerLink="/allForms"
+                        [disabled]="CreatedFormElements.length <=1">All forms
+                </button>
+                <button class="btn editBtnStyle float-right"
+                        [disabled]="CreatedFormElements[formInd]['options'].length <= 0"
+                        (click)="openFormModal(content)">Save form
+                </button>
             </div>
         </div>
 
 
         <ng-template #content let-d="dismiss" let-modal>
-            <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+            <div class="modal-header col-12">
+                <h4 class="modal-title" id="modal-basic-title">Save this form!</h4>
                 <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="modal-body col-12">
-                        <label class="col-4"> Form name: </label>
-                        <input class="col-8" type="text" [(ngModel)]="formName" name="formName" required>
-                    </div>
-                    <div class="modal-body col-12">
-                        <label class="col-4"> Form description: </label>
-                        <input class="col-8" type="text" [(ngModel)]="formDescription" name="formDescription" required>
-                    </div>
-                    <div class="modal-footer col-12">
-                        <button type="button" class="btn editBtnStyle" (click)="saveForm(d)"> Save
-                        </button>
+            <form (ngSubmit)="saveForm(d)" #form="ngForm">
+                <div class="container">
+                    <div class="row">
+                        <div class="modal-body col-12">
+                            <div class="col-12 mb-4">
+                                <div class="row">
+                                    <label class="col-4"> Form name: </label>
+                                    <input class="col-8 form-control" type="text" [(ngModel)]="formName" name="formName"
+                                           required>
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <label class="col-4"> Form description: </label>
+                                    <input class="col-8 form-control" type="text" [(ngModel)]="formDescription"
+                                           name="formDescription" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer col-12">
+                            <button type="submit" class="btn editBtnStyle" [disabled]="form.invalid"> Save </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
         </ng-template>
 
@@ -83,17 +98,6 @@
             <app-text-area (closeTextAreaModal)="modal.dismiss('close')"></app-text-area>
         </ng-template>
 
-
     </div>
 </div>
-
-<!--<div class="container" style="position: sticky; bottom: 0">-->
-<!--<div class="row">-->
-<!--<div class="col-12 text-right">-->
-<!--<button  class="btn btn-success saveBtnStyle" type="submit"-->
-<!--(click)="save()">Save-->
-<!--</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
 

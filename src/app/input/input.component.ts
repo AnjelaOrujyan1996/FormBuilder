@@ -1,9 +1,9 @@
 import {Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {CreatedInputViewComponent} from "../created-input-view/created-input-view.component";
-import {CreatedFormElements} from "../formElementsArray"
-import {EditingOptions} from "../editingOptions";
-import {DOCUMENT} from "@angular/common";
-import {FormIndex} from "../formIndex";
+import {CreatedInputViewComponent} from '../created-input-view/created-input-view.component';
+import {CreatedFormElements} from '../formElementsArray';
+import {EditingOptions} from '../editingOptions';
+import {DOCUMENT} from '@angular/common';
+import {FormIndex} from '../formIndex';
 
 @Component({
     selector: 'app-input',
@@ -39,19 +39,20 @@ export class InputComponent implements OnInit {
         if (this.editingOptions['optionValues']) {
             this.optionValues = this.editingOptions['optionValues'];
         }
-        this.edit = this.editingOptions['edit']
+        this.edit = this.editingOptions['edit'];
         this.inputType = this.editingOptions['inputType'];
         this.inputLabel = this.editingOptions['inputLabel'];
         this.optionCount = this.editingOptions['optionCount'];
-        this.view.nativeElement.style.display = "block";
+        this.view.nativeElement.style.display = 'block';
 
     }
 
     updateAndSeeView(e) {
-        if (e.name === "optValue") {
+        if (e.name === 'optValue') {
             this.optionValues.splice(+(e.id), 1, e.value);
+
             for (let i = 0; i < this.optionValues.length; ++i) {
-                if (this.optionValues[i] === "") {
+                if (this.optionValues[i] === '') {
                     this.ind = i;
                     this.optError = true;
                     return;
@@ -61,10 +62,14 @@ export class InputComponent implements OnInit {
                 }
             }
         }
-        else if (e.name === "optCount" && +(e.value) < this.editingOptions['optionValues'].length) {
-            this.optionValues.splice(+(e.value), 1)
-        } else if (e.name === "types") {
-            if(this.inputType==="radio" || this.inputType === "checkbox") this.optError = true; else this.optError = false;
+        else if (e.name === 'optCount' && +(e.value) < this.editingOptions['optionValues'].length) {
+            this.optionValues.splice(+(e.value), 1);
+        } else if (e.name === 'optCount' && +(e.value) > this.editingOptions['optionValues'].length) {
+            this.optionValues.splice(+(e.value), 0, '');
+            this.ind = +(e.value);
+            this.optError = true;
+        } else if (e.name === 'types') {
+            if (this.inputType === 'radio' || this.inputType === 'checkbox') this.optError = true; else this.optError = false;
         }
 
         this.editingOptions = {
@@ -72,7 +77,7 @@ export class InputComponent implements OnInit {
             inputType: this.inputType,
             optionCount: this.optionCount,
             optionValues: this.optionValues,
-        }
+        };
     }
 
     save() {
@@ -82,7 +87,7 @@ export class InputComponent implements OnInit {
             inputType: this.inputType,
             optionCount: this.optionCount,
             optionValues: this.optionValues,
-        }
+        };
         if (EditingOptions[0]['edit']) {
             this.editingOptions['ind'] = EditingOptions[0]['ind'];
         } else {
@@ -93,7 +98,7 @@ export class InputComponent implements OnInit {
 
         if (EditingOptions[0]['edit']) CreatedFormElements[this.formInd]['options'].splice(this.editingOptions['ind'], 1, this.editingOptions);
         else CreatedFormElements[this.formInd]['options'].push(this.editingOptions);
-        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
         console.log(CreatedFormElements[this.formInd]['options']);
         this.close();
 
@@ -104,7 +109,7 @@ export class InputComponent implements OnInit {
     }
 
     close() {
-        EditingOptions.splice(0, 1)
-        this.closeInputModal.emit("close");
+        EditingOptions.splice(0, 1);
+        this.closeInputModal.emit('close');
     }
 }

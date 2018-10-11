@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {CreatedFormElements} from "../formElementsArray";
-import {CreatedSelectViewComponent} from "../created-select-view/created-select-view.component";
-import {EditingOptions} from "../editingOptions";
-import {FormIndex} from "../formIndex";
+import {CreatedFormElements} from '../formElementsArray';
+import {CreatedSelectViewComponent} from '../created-select-view/created-select-view.component';
+import {EditingOptions} from '../editingOptions';
+import {FormIndex} from '../formIndex';
 
 @Component({
     selector: 'app-select',
@@ -13,13 +13,13 @@ import {FormIndex} from "../formIndex";
 export class SelectComponent implements OnInit {
     optionValues: String[] = [];
     selectOptions: Object = EditingOptions[0];
-    edit:Boolean;
-    selectLabel:String;
-    optionCount:String;
-    optError:Boolean;
-    ind:Number;
+    edit: Boolean;
+    selectLabel: String;
+    optionCount: String;
+    optError: Boolean = true;
+    ind: Number;
 
-    formInd:any = FormIndex['formIndex'];
+    formInd: any = FormIndex['formIndex'];
 
     @Output() closeSelectModal = new EventEmitter<any>();
 
@@ -37,14 +37,14 @@ export class SelectComponent implements OnInit {
         this.edit = this.selectOptions['edit'];
         this.selectLabel = this.selectOptions['selectLabel'];
         this.optionCount = this.selectOptions['optionCount'];
-        this.view.nativeElement.style.display = "block";
+        this.view.nativeElement.style.display = 'block';
     }
 
     updateAndSeeView(e) {
-        if (e.name === "optValue") {
+        if (e.name === 'optValue') {
             this.optionValues.splice(+(e.id), 1, e.value);
-            for(let i = 0; i < this.optionValues.length; ++i){
-                if (this.optionValues[i] === "") {
+            for (let i = 0; i < this.optionValues.length; ++i) {
+                if (this.optionValues[i] === '') {
                     this.ind = i;
                     this.optError = true;
                     return;
@@ -53,30 +53,31 @@ export class SelectComponent implements OnInit {
                     this.optError = false;
                 }
             }
-        } else if (e.name === "optCount" && +(e.value) < this.selectOptions['optionValues'].length) {
-            this.optionValues.splice(+(e.value), 1)
+        } else if (e.name === 'optCount' && +(e.value) < this.selectOptions['optionValues'].length) {
+            this.optionValues.splice(+(e.value), 1);
+        } else if (e.name === 'optCount' && +(e.value) > this.selectOptions['optionValues'].length) {
+            this.optionValues.splice(+(e.value), 0, '');
+            this.optError = true;
         }
 
         this.selectOptions = {
-            type: "Select",
+            type: 'Select',
             selectLabel: this.selectLabel,
             optionCount: this.optionCount,
             optionValues: this.optionValues
-        }
-
-        this.view.nativeElement.style.display = "block";
+        };
     }
 
     save() {
         this.selectOptions = {
-            type: "Select",
+            type: 'Select',
             selectLabel: this.selectLabel,
             optionCount: this.optionCount,
             optionValues: this.optionValues,
-        }
+        };
 
-        if (EditingOptions[0]['edit']){
-            this.selectOptions['ind']= EditingOptions[0]['ind']
+        if (EditingOptions[0]['edit']) {
+            this.selectOptions['ind'] = EditingOptions[0]['ind'];
         } else {
             this.selectOptions['ind'] = CreatedFormElements[this.formInd]['options'].length;
         }
@@ -95,7 +96,7 @@ export class SelectComponent implements OnInit {
     }
 
     close() {
-        EditingOptions.splice(0, 1)
-        this.closeSelectModal.emit("close")
+        EditingOptions.splice(0, 1);
+        this.closeSelectModal.emit('close');
     }
 }
