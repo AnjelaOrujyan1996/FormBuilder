@@ -1,6 +1,6 @@
 <div class="row input-group mb-3 col-12" [ngStyle]="{'word-break': 'break-word'}">
     <div class="input-group-prepend col-12">
-        <h6 class="col-12 mb-2" for="txt">{{textAreaOptions['textAreaLabel']}}</h6>
+        <h5 class="col-12 mb-2 p-0" for="txt"><ng-content></ng-content>{{textAreaOptions['textAreaLabel']}}</h5>
     </div>
     <div class="col-12" >
         <textarea style="max-width: 100%; max-height:200px" name="message" id="txt" rows="{{+(textAreaOptions['rowsCount'])}}" cols="{{+(textAreaOptions['colsCount'])}}"></textarea>

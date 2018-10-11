@@ -15,9 +15,14 @@ export class AllFormsComponent implements OnInit {
     }
 
     ngOnInit() {
+
     }
 
-    goBack() {
+    openForm(id):void {
+        this.router.navigate([`/form/${id}`])
+    }
+
+    goBack():void {
        this.router.navigate(["/"])
     }
 

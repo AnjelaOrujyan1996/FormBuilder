@@ -12,8 +12,7 @@
                  dragula="{{dragulaName}}" id="right" #formContent
                  [(dragulaModel)]="right">
 
-                <div class="createdForm col-12"
-                     *ngFor="let opt of CreatedFormElements[formInd]['options']; let i=index">
+                <div class="createdForm col-12" *ngFor="let opt of CreatedFormElements[formInd]['options']; let i=index">
                     <div class="row">
                         <div class="col-12">
                             <button class="btn deleteBtnStyle float-right" (click)="delete(i)"><i

@@ -18,7 +18,8 @@ import { TextAreaComponent } from './text-area/text-area.component';
 import { CreatedTextAreaviewComponent } from './created-text-areaview/created-text-areaview.component';
 import { AllFormsComponent } from './all-forms/all-forms.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { SelectedFormComponent } from './selected-form/selected-form.component';
+import {AuthGuardService} from "./auth-guard.service";
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { AppRoutingModule } from './app-routing.module';
         TextAreaComponent,
         CreatedTextAreaviewComponent,
         AllFormsComponent,
+        SelectedFormComponent,
 
     ],
     imports: [
@@ -47,6 +49,7 @@ import { AppRoutingModule } from './app-routing.module';
         AppRoutingModule
     ],
     providers: [
+        AuthGuardService
     ],
     bootstrap: [AppComponent]
 })

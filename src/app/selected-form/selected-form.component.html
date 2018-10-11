@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row">
+        <span class="float-right -italic">Created:{{CreatedFormElements[formInd]['date'] | date:"M/d/yy h:mm a"}} </span>
+        <h1 class="col-12 text-center text-uppercase mb-1">{{CreatedFormElements[formInd]['formName']}}</h1>
+        <h3 class="col-12 text-center mb-3">{{CreatedFormElements[formInd]['formDescription']}}</h3>
+        <div class="createdForm col-12" *ngFor="let opt of CreatedFormElements[formInd]['options']; let i=index">
+            <div class="row">
+                <div class="col-12 m-2" [ngSwitch]="opt['type']">
+                    <app-created-input-view *ngSwitchCase="'Input'"
+                                            [inputOptions]="opt"><span>{{i}})</span></app-created-input-view>
+                    <app-created-select-view *ngSwitchCase="'Select'"
+                                             [selectOptions]="opt"><span>{{i}})</span></app-created-select-view>
+                    <app-created-text-areaview *ngSwitchCase="'TextArea'"
+                                               [textAreaOptions]="opt"><span>{{i}})</span></app-created-text-areaview>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

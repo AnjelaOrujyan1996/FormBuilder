@@ -10,7 +10,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let form of forms, let i=index">
+            <tr *ngFor="let form of forms, let i=index"  (click)="openForm(i)">
                 <td *ngIf="i !==forms.length-1" class="text-center ">{{form['formIndex']}}</td>
                 <td *ngIf="i !==forms.length-1" class=" text-center ">{{form['formName']}}</td>
                 <td *ngIf="i !==forms.length-1" class=" text-center " style="word-wrap: break-word">{{form['formDescription']}}</td>

@@ -2,28 +2,24 @@
     <div class="row" *ngIf="inputOptions['inputType']==='date'; then date; else outher"></div>
 
     <ng-template #date>
-            <label class="col-12 m-0 p-0" [ngStyle]="{'word-break': 'break-word'}" >{{inputOptions['inputLabel']}}</label>
-            <div class="col-xs-12 col-lg-12 col-md-4 form-group">
-                <input class="form-control mb-4 col-12" type="text"
+            <label class="col-12 m-0 p-0" [ngStyle]="{'word-break': 'break-word'}" ><ng-content></ng-content>{{inputOptions['inputLabel']}}</label>
+            <div class="col-xs-12 col-lg-12 col-md-4">
+                <input class="form-control mb-4 " type="text"
                        #dp="bsDatepicker"
                        bsDatepicker
                        [bsValue]="bsValue">
             </div>
-            <!--<div class="col-xs-12 col-12 col-md-3 form-group">-->
-                <!--<button class="btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">Date Picker-->
-                <!--</button>-->
-            <!--</div>-->
     </ng-template>
 
     <ng-template #outher>
         <div class="col-12">
-            <h6 class="col-12 m-0 p-0 mb-2" [ngStyle]="{'word-break': 'break-word'}">{{inputOptions['inputLabel']}}</h6>
+            <h5 class="col-12 m-0 p-0 mb-2" [ngStyle]="{'word-break': 'break-word'}"><ng-content></ng-content>{{inputOptions['inputLabel']}}</h5>
             <div *ngIf="inputOptions.inputType==='radio'||inputOptions.inputType==='checkbox'; else emptyDiv">
                 <div *ngFor="let num of arrayOne(+(inputOptions.optionCount)); let i=index">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <div class="input-group-text " >
-                                <input   [ngStyle]="{'word-break': 'break-word'}"  type="{{inputOptions['inputType']}}" name="{{inputOptions['inputName']}}"/>
+                            <div class="input-group-text" >
+                                <input  [ngStyle]="{'word-break': 'break-word'}"  type="{{inputOptions['inputType']}}" name="{{inputOptions['inputName']}}"/>
                             </div>
                         </div>
                         <input type="text" class="form-control col-12" value="{{inputOptions['optionValues'][i]}}" required>

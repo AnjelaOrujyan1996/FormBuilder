@@ -1,8 +1,9 @@
+
 <div class=" input-group mb-3" [ngStyle]="{'word-break': 'break-word'}">
   <div class="input-group-prepend col-12" >
-    <h6 class="col-12 mb-2" for="inputGroupSelect01" >{{selectOptions['selectLabel']}}</h6>
+    <h5 class="col-12 mb-2 p-0" for="inputGroupSelect01" ><ng-content></ng-content>{{selectOptions['selectLabel']}}</h5>
   </div>
-  <div class="col-12" [ngStyle]="{'word-break': 'break-word'}">
+  <div class="col-4" [ngStyle]="{'word-break': 'break-word'}">
     <select class="custom-select" id="inputGroupSelect01"  >
       <option selected> Choose...</option>
       <option *ngFor="let opt of selectOptions['optionValues']; let i=index" value="{{opt}}"> {{opt}}</option>

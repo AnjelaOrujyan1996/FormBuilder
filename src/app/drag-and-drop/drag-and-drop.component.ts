@@ -186,12 +186,10 @@ export class DragAndDropComponent implements OnInit, AfterViewChecked {
     saveForm(d) {
         let x = confirm("Are you sure you want to save it?")
         if (x) {
-            this.CreatedFormElements[this.formInd]['options'].splice(0)
-            this.router.navigate(["/allForms"]);
-
             CreatedFormElements[this.formInd]['formIndex'] = this.formInd;
             CreatedFormElements[this.formInd]['formName'] = this.formName;
             CreatedFormElements[this.formInd]['formDescription'] = this.formDescription;
+            CreatedFormElements[this.formInd]['options'] =  this.CreatedFormElements[this.formInd]['options'];
             CreatedFormElements[this.formInd]['date'] = new Date();
 
             FormIndex['formIndex']++;
@@ -202,13 +200,15 @@ export class DragAndDropComponent implements OnInit, AfterViewChecked {
                 date: Date,
                 options: []
             })
-        } else {
-            this.formName = "";
-            this.formDescription = "";
-        }
 
-        console.dir(CreatedFormElements)
+            this.router.navigate(["/allForms"]);
+        } else {
+            return;
+        }
+        this.formName = "";
+        this.formDescription = "";
         d();
+        console.dir(CreatedFormElements)
     }
 
     openFormModal(content) {
